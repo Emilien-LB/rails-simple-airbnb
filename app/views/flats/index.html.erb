@@ -1,20 +1,35 @@
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand">Simple Airbnb</a>
+    <form class="d-flex" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+
+
 <h2>Simple Airbnb</h2>
+
 
 <h1>All our flats</h1>
 
-<%= link_to "Add Flat", new_flat_path, class: "btn btn-outline-primary" %>
+<%= link_to "Add Flat", new_flat_path, class: "btn btn-outline-primary d-flex-end" %>
 
 <div class="row">
   <% @flats.each do |flat| %>
-    <div class="card" style="width: 18rem;">
+    <div class="card col-md-4" style="width: 18rem;">
       <img src="..." class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title"> <%= flat.name %></h5>
         <p class="card-text"><%= flat.description %></p>
         <i class="fa-solid fa-user"><%= flat.number_of_guests %></i>
         <i class="fa-solid fa-euro-sign"><%= flat.price_per_night %></i>
-        <div class="card-body">
+        <div class="flat-card-actions">
           <%= link_to "More info", flat_path(flat) %>
+          <%= link_to "Edit info",  edit_flat_path(flat), class: "ms-3 text-warning" %>
+          <%= link_to "Delete", flat_path(flat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"ms-3 text-danger" %>
         </div>
       </div>
     </div>

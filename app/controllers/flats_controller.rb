@@ -21,6 +21,25 @@ class FlatsController < ApplicationController
     end
   end
 
+  def edit
+    @flat = Flat.find(params[:id])
+  end
+
+  def update
+    @flat = Flat.new(flat_params)
+    if @flat.update(flat_params)
+      redirect_to flat_path(@flat), notice: "Flat updated!", status: :see_other
+    else
+      render :index
+    end
+  end
+
+  def destroy
+    @flat = Flat.find(params[:id])
+    @flat.delete
+    redirect_to flats_path, notice: "Flat deleted!", status: :see_other
+  end
+
   private
 
   def flat_params
